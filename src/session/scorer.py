@@ -5,6 +5,12 @@ def is_chord_correct(target_chord, vision_verdict, sound_verdict):
     sound_note = sound_verdict["sound_pick_up"]
     if vision_verdict['confidence'] < 0.7:
         return False
+    if sound_verdict['confidence'] < 0.7:
+        return False
+    if sound_verdict['volume'] < 20: 
+        return False
     return vision_chord == target_chord and sound_note == target_chord
+    
+    
 
 print(is_chord_correct("F#", example_vision_verdict, example_sound_verdict))
