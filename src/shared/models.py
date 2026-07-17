@@ -2,7 +2,7 @@
 
 example_vision_verdict = {
     "chord_shape": "F#", #the chord it thinks im making 
-    "confidence" : 0.87, # how sure it is that im making this chord 
+    "confidence" : 0.3, # how sure it is that im making this chord 
     "timestamp" : 12.43, # how many seconds into it the song it's been
 }
 
