@@ -1,8 +1,8 @@
-from src.shared.models import example_sound_verdict, example_chord_chart
+from src.shared.models import example_vision_verdict, example_sound_verdict
 
-def is_chord_correct(target_chord example_sound_verdict, example_chord_chart): 
+def is_chord_correct(target_chord, vision_verdict, sound_verdict):
     vision_chord = vision_verdict["chord_shape"]
     sound_note = sound_verdict["sound_pick_up"]
+    return vision_chord == target_chord and sound_note == target_chord
 
-
-    return False
+print(is_chord_correct("F#", example_vision_verdict, example_sound_verdict))
