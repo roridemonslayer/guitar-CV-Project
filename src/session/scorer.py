@@ -13,4 +13,4 @@ def is_chord_correct(target_chord, vision_verdict, sound_verdict):
     
     
 
-print(is_chord_correct("F#", example_vision_verdict, example_sound_verdict))
+print(is_chord_correct("G", example_vision_verdict, example_sound_verdict))
