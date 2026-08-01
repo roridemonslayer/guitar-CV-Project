@@ -6,10 +6,19 @@ def detect_freq(audio, sample_rate = 44100): #this is the default value
     peak_index = np.argmax(spectrum) #this returns which slot holds the biggest value. so if slot is 220 then the asnwer is 220 
     return freqs[peak_index]
 
+NOTE_NAME = ["C", "C#", "D","D#","E","F","F#","G","A","A#","B"]
 
+
+def freq_to_note(freq):
+    semitones_from_a4 = 12 *np.log2(freq/440.0)
+    note_index = round(semitones_from_a4) + 9 
+    return NOTE_NAME[note_index % 12]
+
+#this whole line js take sa nfumer liek 330 and turn it to note. "C"
 if __name__ == "__main__":
     from src.sound.capture import record_chunk
     print("Play or hum a note...")
     audio = record_chunk()
-    print("Frequency:", detect_freq(audio))
-
+    freq = detect_freq(audio)
+    print("Frequency:", freq)
+    print("Note:", freq_to_note(freq))
