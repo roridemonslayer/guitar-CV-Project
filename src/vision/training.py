@@ -23,7 +23,7 @@ def load_data ():
 
     with open(CSV_PATH) as f:
         for row in csv.reader(f):
-            x.append([float(n) for n in row[:1]])
+            x.append(normalize([float(n) for n in row[:-1]]))
             y.append(row[-1])
     return x,y
 
