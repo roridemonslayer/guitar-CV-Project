@@ -1,5 +1,6 @@
 import pickle 
 import time
+from collections import deque, Counter
 
 MODEL_PATH = "chord_model.pkl"
 
