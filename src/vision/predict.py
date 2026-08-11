@@ -2,6 +2,8 @@ import pickle
 import time
 from collections import deque, Counter
 
+history = deque(maxlen=10)
+
 MODEL_PATH = "chord_model.pkl"
 
 def load_model():
