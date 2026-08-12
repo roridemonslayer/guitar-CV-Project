@@ -9,6 +9,9 @@ MODEL_PATH = "chord_model.pkl"
 def load_model():
     with open(MODEL_PATH, "rb") as f:
         return pickle.load(f)
+def smooth(chord):
+    history.append(chord)
+    return Counter(history).most_common(1)[0][0]
 
 def get_vision_verdict(model, hand): #this loads the model and my hands
     from src.vision.training import normalize #this is getting ht emath 
@@ -43,7 +46,7 @@ if __name__ == "__main__":
             result = hands.process(rgb)
             if result.multi_hand_landmarks:
                 verdict = get_vision_verdict(model, result.multi_hand_landmarks[0])
-                label = f"{verdict['chord_shape']} {verdict['confidence']:.2f}"
+                label = f"{smooth(verdict['chord_shape'])} {verdict['confidence']:.2f}"
                 cv2.putText(frame, label, (10, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
             cv2.imshow("Predict", frame)
