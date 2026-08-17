@@ -1,17 +1,38 @@
-import time #this is being used for the countdown 
-from src.shared.models import example_chord_chart, example_sound_verdict,example_vision_verdict
-from src.session.scorer import is_chord_correct
-for num in [3,2,1]:
-    print (num)
-    time.sleep(1)#pauses at the one second point doesn't move
-print("Go!")
+import time
+import cv2 
+import mediapipe as mp 
 
-for entry in example_chord_chart["sequence"]:
-    print(f"Play: {entry['chord']}")
 
-    #here is our judgemebt scorer 
-    result = is_chord_correct(entry['chord'],example_vision_verdict,example_sound_verdict, )
-    print(f"Correct:{result}")
+from src.shared.models import example_chord_chart #the song to play
+from src.session.scorer import is_chord_correct #the judget 
+from src.vision.predict import load_model, get_vision_verdict, smooth #the cam
+from src.sound.pitch import get_sound_verdict #ythe mic 
+from src.vision.capture import open_camera # the cam opener
+
+TIMEOUT = 0.5 #sec per chord before it moves on 
+
+mp.hands = mp.solutions.hands. #the hand model 
+
+if __name__ ==  "__main__":
+    model = load_model()
+    cam  = open_camera() #this opens up the camera 
+
+    for num in [3,2,1]:
+        print(num)
+        time.sleep(1) #one beat the time
+    print("GO!")
+
+    with mp_hands.hands(max_num_hands = 1) as hands: #start hands tracking 
+        for entry in example_chord_chart["sequence"]: #goes chord by chord 
+            target = entry["chord"] #t5he chord ur supposed to play
+            print(f"play: {target}")
+            started = time.time() #time stamp for the chord
+            got_it = False
+
+            while time.time() - started < TIMEOUT: #keep goingm till the 5 sec time is out 
+                ok, frame = cam.read() #grabs one frame
+                if not ok:
+                    break #cam break
 
 
 
