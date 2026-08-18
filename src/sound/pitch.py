@@ -11,7 +11,6 @@ def detect_freq(audio, sample_rate=44100):  # takes audio numbers, returns the d
     peak_index = np.argmax(spectrum)  # which slot is loudest (a position, not a value)
     return freqs[peak_index]  # look up that slot's Hz
 
-
 def freq_to_note(freq):  # takes a Hz number, returns a letter like "C"
     semitones_from_a4 = 12 * np.log2(freq / 440.0)  # how many semitones away from A4 (440 Hz)
     note_index = round(semitones_from_a4) + 9  # snap to nearest note; +9 shifts A to its spot in a C-first list
